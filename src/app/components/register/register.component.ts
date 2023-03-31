@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PasswordMatchValidator } from 'src/app/validators/password-match.validator';
-import { HttpClient } from '@angular/common/http';
+import { CriarContaService } from 'src/app/services/criar-conta.service';
+import { CriarContaRequest } from 'src/app/models/criar-conta.request.model';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-register',
@@ -10,10 +12,13 @@ import { HttpClient } from '@angular/common/http';
 })
 export class RegisterComponent {
 
+  //atributos
+  mensagem: string = '';
 
   //método construtor
   constructor(
-    private httpClient: HttpClient //injeção de dependência
+    private criarContaService: CriarContaService,
+    private spinner: NgxSpinnerService
   ) {
   }
 
@@ -54,29 +59,27 @@ export class RegisterComponent {
   //função para capturar o SUBMIT do formulário
   onSubmit(): void {
 
-    //requisição
-    let requestBody = {
-      nome: this.formRegister.value.nome,
-      email: this.formRegister.value.email,
-      senha: this.formRegister.value.senha
+    this.spinner.show();
+
+    const criarContaRequest: CriarContaRequest = {
+      nome: this.formRegister.value.nome as string,
+      email: this.formRegister.value.email as string,
+      senha: this.formRegister.value.senha as string
     };
 
-    //enviando uma requisição HTTP POST para a API
-    this.httpClient.post(
-      'http://appcontatos1-001-site1.gtempurl.com/api/criar-conta', //endpoint
-      requestBody //dados da requisição
-    )
+    this.criarContaService.post(criarContaRequest)
       .subscribe({ //capturando o retorno (promisse) da API
-        next: (data) => { //obtendo a resposta de sucesso da API
-          console.log(data);
+        next: (data) => { //obtendo a resposta de sucesso da API          
+          this.mensagem = `Parabéns, ${data.nome}, sua conta foi criada com sucesso!`;
+          this.formRegister.reset(); //limpar os campos do formulário
         },
         error: (e) => { //obtendo a resposta de erro da API
-          console.log(e.error);
+          this.mensagem = e.error.message;
         }
       })
-
-
+      .add(() => { // é igual o finally do try-catch
+        this.spinner.hide();
+      })
   }
-
 
 }
