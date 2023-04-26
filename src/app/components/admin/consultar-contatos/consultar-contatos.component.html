@@ -1,0 +1,44 @@
+<div class="card m-4"> 
+    <div class="card-body">
+        
+        <h5>Consulta de contatos</h5> 
+        <p>Listagem de contatos cadastrados em sua agenda.</p> <hr /> 
+        
+        <div class="table-responsive"> 
+            <table class="table table-sm table-stripped table-hover"> 
+                <thead> 
+                    <tr> 
+                        <th>Nome do contato</th> 
+                        <th>Email</th> 
+                        <th>Telefone</th> 
+                        <th>Operações</th> 
+                    </tr> 
+                </thead> 
+                <tbody> 
+                    <tr> 
+                        <td></td>                              
+                        <td></td> 
+                        <td></td> 
+                        <td> 
+                            <button class="btn btn-primary btn-sm" 
+                                [routerLink]="['/editar-contatos', '1']"> 
+                                Editar 
+                            </button> 
+                            &nbsp; 
+                                <button class="btn btn-danger btn-sm"> 
+                                    Excluir 
+                                </button>
+                                </td> 
+                            </tr> 
+                        </tbody> 
+                    <tfoot> 
+                        <tr> 
+                            <td colspan="4">
+                                Quantidade de contatos: 0 
+                            </td> 
+                    </tr> 
+                </tfoot> 
+            </table> 
+        </div> 
+    </div> 
+</div>

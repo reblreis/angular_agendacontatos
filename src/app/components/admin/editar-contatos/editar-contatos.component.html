@@ -1,0 +1,46 @@
+<div class="card m-4"> 
+    <div class="card-body">
+
+        <h5>Edição de contatos</h5> 
+        <p>Preencha os campos para alterar os dados do contato.</p> 
+        <hr /> 
+
+        <form> 
+            
+            <!-- campo oculto --> 
+            <input type="hidden"/> 
+            
+            <div class="row mb-2"> 
+                <div class="col-md-6">
+                    <label>Nome do contato:</label> 
+                    <input type="text" class="form-control" 
+                            placeholder="Ex: João da Silva" /> 
+                </div> 
+                
+                <div class="col-md-3"> 
+                    <label>Email:</label> 
+                    <input type="text" class="form-control" 
+                            placeholder="Ex: joaosilva@gmail.com" /> 
+                </div> 
+                
+                <div class="col-md-3"> 
+                    <label>Telefone:</label> 
+                    <input type="text" class="form-control" 
+                            placeholder="Ex: (21)99999-0000" /> 
+                </div> 
+            </div> 
+            
+            <div class="row mb-2"> 
+                <div class="col-md-12"> 
+                    <input type="submit" class="btn btn-primary btn-sm" value="Salvar Alterações" /> 
+                    &nbsp; 
+                    <button class="btn btn-light btn-sm" [routerLink]="['/consultar-contatos']"> 
+                        Voltar 
+                    </button> 
+                </div> 
+            </div> 
+
+        </form> 
+
+    </div> 
+</div>
