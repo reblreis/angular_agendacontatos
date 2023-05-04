@@ -9,6 +9,8 @@ import { AutenticarGuard } from './guards/autenticar.guard';
 import { ChartModule } from 'angular-highcharts';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { FilterPipeModule } from 'ngx-filter-pipe';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -42,7 +44,9 @@ import { EditarContatosComponent } from './components/admin/editar-contatos/edit
     NgxSpinnerModule,
     ChartModule,
     NgxMaskDirective,
-    NgxMaskPipe
+    NgxMaskPipe,
+    NgxPaginationModule,
+    FilterPipeModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

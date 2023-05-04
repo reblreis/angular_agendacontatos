@@ -1,44 +1,71 @@
-<div class="card m-4"> 
+<div class="card m-4">
     <div class="card-body">
-        
-        <h5>Consulta de contatos</h5> 
-        <p>Listagem de contatos cadastrados em sua agenda.</p> <hr /> 
-        
-        <div class="table-responsive"> 
-            <table class="table table-sm table-stripped table-hover"> 
-                <thead> 
-                    <tr> 
-                        <th>Nome do contato</th> 
-                        <th>Email</th> 
-                        <th>Telefone</th> 
-                        <th>Operações</th> 
-                    </tr> 
-                </thead> 
-                <tbody> 
-                    <tr> 
-                        <td></td>                              
-                        <td></td> 
-                        <td></td> 
-                        <td> 
-                            <button class="btn btn-primary btn-sm" 
-                                [routerLink]="['/editar-contatos', '1']"> 
-                                Editar 
-                            </button> 
-                            &nbsp; 
-                                <button class="btn btn-danger btn-sm"> 
-                                    Excluir 
-                                </button>
-                                </td> 
-                            </tr> 
-                        </tbody> 
-                    <tfoot> 
-                        <tr> 
-                            <td colspan="4">
-                                Quantidade de contatos: 0 
-                            </td> 
-                    </tr> 
-                </tfoot> 
-            </table> 
-        </div> 
-    </div> 
+
+        <h5>Consulta de contatos</h5>
+        <p>Listagem de contatos cadastrados em sua agenda.</p>
+        <hr />
+
+        <div class="row mb-2" *ngIf="contatos.length > 0"> 
+            <div class="col-md-4"> 
+                <input type="text" 
+                name="nome" 
+                placeholder="Pesquisar contatos por nome" 
+                class="form-control" 
+                autocomplete="off" 
+                [(ngModel)]="filtro.nome" 
+                /> 
+            </div> 
+        </div>
+
+        <div *ngIf="contatos.length > 0" class="table-responsive">
+
+            <table class="table table-sm table-stripped table-hover">
+                <thead>
+                    <tr>
+                        <th>Nome do contato</th>
+                        <th>Email</th>
+                        <th>Telefone</th>
+                        <th>Cadastrado em</th>
+                        <th [width]="140">Operações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let c of contatos | paginate: { itemsPerPage: 5, currentPage : pagina }">
+                        <td>{{c.nome | uppercase}}</td>
+                        <td>{{c.email | lowercase}}</td>
+                        <td>{{c.telefone | mask : '(00)00000-0000'}}</td>
+                        <td>{{c.dataCriacao | date: 'dd/MM/yyyy'}}</td>
+                        <td>
+                            <button class="btn btn-outline-primary btn-sm"
+                                [routerLink]="['/editar-contatos', '1']">
+                                Editar
+                            </button>
+                            &nbsp;
+                            <button class="btn btn-outline-danger btn-sm">
+                                Excluir
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="5">
+                            Quantidade de contatos: {{(contatos |
+                                filterBy: filtro).length}}
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <div class="text-center">
+                <pagination-controls
+                    (pageChange)="pageChange($event)"
+                    previousLabel="Página anterior"
+                    nextLabel="Próxima página"
+                >                
+                </pagination-controls>
+            </div>
+
+        </div>
+    </div>
 </div>
