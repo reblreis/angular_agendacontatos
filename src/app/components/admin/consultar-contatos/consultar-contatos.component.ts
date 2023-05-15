@@ -12,8 +12,10 @@ export class ConsultarContatosComponent implements OnInit {
 
   //atributos
   contatos: ConsultarContatos[] = [];
-  filtro: any = { nome: ''};
+  contato: ConsultarContatos | null = null;
+  filtro: any = { nome: '' };
   pagina: number = 1;
+  mensagem: string = '';
 
   //construtor
   constructor(
@@ -24,9 +26,7 @@ export class ConsultarContatosComponent implements OnInit {
 
   //evento executado antes do componente carregar
   ngOnInit(): void {
-
     this.spinner.show();
-
     this.contatosService.getAll()
       .subscribe({
         next: (data) => {
@@ -36,6 +36,30 @@ export class ConsultarContatosComponent implements OnInit {
           console.log(e.error);
         }
       }).add(() => {
+        this.spinner.hide();
+      })
+  }
+
+  //função para capturar um contato selecionado na tabela
+  setContato(contato: ConsultarContatos): void {
+    this.contato = contato;
+  }
+
+  //função para realizar a exclusão do contato
+  onDelete(): void {
+    this.spinner.show();
+    this.contatosService.delete(this.contato?.idContato as string)
+      .subscribe({
+        next: (data) => {
+          this.mensagem = `Contato ${data.nome}, excluído com sucesso.`;
+          this.ngOnInit();
+        },
+        error: (e) => {
+          this.mensagem = 'Falha ao excluir o contato.'
+          console.log(e.error);
+        }
+      })
+      .add(() => {
         this.spinner.hide();
       })
   }
