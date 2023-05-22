@@ -5,7 +5,6 @@ import { AutenticarRequest } from 'src/app/models/autenticar.request.model';
 import { AutenticarHelper } from 'src/app/helpers/autenticar.helper';
 import { NgxSpinnerService } from 'ngx-spinner';
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -13,10 +12,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class LoginComponent {
 
-
   //atributos
   mensagem: string = '';
-
 
   //método construtor
   constructor(
@@ -25,7 +22,6 @@ export class LoginComponent {
     private spinner: NgxSpinnerService
   ) {
   }
-
 
   //estrutura de formulário
   formLogin = new FormGroup({
@@ -41,26 +37,21 @@ export class LoginComponent {
     ])
   });
 
-
   //função para verificar a validação dos campos
   get form(): any {
     //retornar os controles do formulário (FormControl)
     return this.formLogin.controls;
   }
 
-
   //função para capturar o SUBMIT do formulário
   onSubmit(): void {
 
-
     this.spinner.show();
-
 
     const autenticarRequest: AutenticarRequest = {
       email: this.formLogin.value.email as string,
       senha: this.formLogin.value.senha as string
     };
-
 
     this.autenticarService.post(autenticarRequest)
       .subscribe({

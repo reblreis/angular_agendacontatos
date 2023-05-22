@@ -4,22 +4,18 @@
             <div class="card mt-2">
                 <div class="card-body">
 
-
                     <h2 class="card-title text-center">Criar Conta</h2>
                     <p class="text-center">Preencha os campos para cadastrar sua conta.</p>
                     <hr />
-
 
                     <div *ngIf="mensagem" class="alert alert-secondary alert-dismissible fade show" role="alert">
                         <strong>{{mensagem}}</strong>
                         <button type="button" class="btn-close" aria-label="Close"
                                 (click)="mensagem = ''">                            
                         </button>
-                    </div>                    
-
+                    </div>              
 
                     <form [formGroup]="formRegister" (ngSubmit)="onSubmit()">
-
 
                         <div class="form-group mb-2">
                             <label>Informe seu nome:</label>
@@ -90,9 +86,7 @@
                             </a>
                         </div>
 
-
                     </form>
-
 
                 </div>
             </div>

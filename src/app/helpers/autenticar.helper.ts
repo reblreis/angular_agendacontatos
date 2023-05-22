@@ -7,9 +7,7 @@ import { AutenticarResponse } from "../models/autenticar.response.model";
 })
 export class AutenticarHelper {
 
-
     auth_usuario: string = 'auth_usuario';
-
 
     /*
         método para receber os dados do usuário
@@ -29,7 +27,6 @@ export class AutenticarHelper {
         return localStorage.getItem(this.auth_usuario) != null;
     }
 
-
     /*
         método para retornar os dados
         gravados na local storage
@@ -42,7 +39,6 @@ export class AutenticarHelper {
             return null;
     }
 
-
     /*
         método para apagar o conteúdo
         gravado na local storage
@@ -50,6 +46,4 @@ export class AutenticarHelper {
     signOut(): void {
         localStorage.removeItem(this.auth_usuario);
     }
-
-
 }
